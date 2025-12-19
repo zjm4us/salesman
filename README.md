@@ -65,24 +65,27 @@ python routeplot.py cities2k.dat route2k.dat -w
 > All distances are **round-trip distances** in kilometers.
 
 
+##  Plots
 
-Plots
-Route Plots (PDF)
+### Route Plots (PDF)
 
-'cities23.pdf'
-'cities150.pdf'
-'cities1k.pdf'
-'cities2k.pdf (generated using the -w option)'
+- `cities23.pdf`  
+- `cities150.pdf`  
+- `cities1k.pdf`  
+- `cities2k.pdf` (use the `-w` option)
 
-'Annealing Schedules (Distance vs Temperature)'
-'an23.png'
-'an150.png'
-'an1.png'
-'an2.png'
+### Annealing Schedules (Distance vs Temperature)
 
-'Each annealing plot shows the total route distance as a function of temperature during the simulated annealing process.'
+- `an23.png`  
+- `an150.png`  
+- `an1.png`  
+- `an2.png`  
 
-Updates to routeplot.py
-Legend added: The plot now includes a legend in the top-left corner to indicate which line corresponds to which route:
-Red line: Original city order
-Blue line: Optimized route (simulated annealing)
+> Each plot shows the total route distance as a function of temperature during the simulated annealing process.
+
+##  Updates to `routeplot.py`
+
+- **Legend added:** The plot now includes a legend in the top-left corner to indicate which line corresponds to which route:  
+  - ** Red line:** Original city order  
+  - ** Blue line:** Optimized route (Simulated Annealing)
+

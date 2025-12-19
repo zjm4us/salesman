@@ -12,7 +12,7 @@ def load_xy(filename):
             cols = line.split()
             # use only first two columns as floats
             data.append([float(cols[0]), float(cols[1])])
-    data.append(data[0]) # close the path from the last to the 1st city
+    data.append(data[0])  # close the path from the last to the 1st city
     return np.array(data)
 
 def load_polygons(filename):
@@ -43,62 +43,62 @@ def load_polygons(filename):
 
     return polygons
 
-
-def make_plot(infile,optfile=None,region="NA"):
+def make_plot(infile, optfile=None, region="NA"):
     '''
     infile: (required) a list of cities
-    outfile: a list of cities ordered for optimized route
-    region: area of the globe to plot"
+    optfile: a list of cities ordered for optimized route
+    region: area of the globe to plot
             NA = North America
             World = the whole world
     '''
-    
+
     # Load data
-    polygons    = load_polygons("world_50m.dat")
-    #polygons    = load_polygons("world.dat") # low res version
+    polygons = load_polygons("world_50m.dat")
+    #polygons = load_polygons("world.dat") # low res version
     cities_orig = load_xy(infile)
-    if optfile: cities_out  = load_xy(optfile)
+    if optfile: 
+        cities_out = load_xy(optfile)
 
     fig, ax = plt.subplots(figsize=(10, 6))
 
     # Plot world map (outline)
-    #ax.plot(world[:,0], world[:,1])
     for poly in polygons:
         ax.plot(poly[:,0], poly[:,1], color="black", lw=0.8)
 
-    # Plot original city order (thin line)
-    ax.plot(cities_orig[:,0], cities_orig[:,1], lw=1, color="red", alpha=0.5)
+    # Plot original city order (thin red line)
+    orig_line, = ax.plot(cities_orig[:,0], cities_orig[:,1], lw=1, color="red", alpha=0.5, label="Original Route")  # new label for legend
 
     # Plot salesman path (lines + points)
-    if optfile: ax.plot(cities_out[:,0], cities_out[:,1],
-                        lw=2, color="blue", marker='o', markersize=3)
+    if optfile:
+        sa_line, = ax.plot(cities_out[:,0], cities_out[:,1],
+                           lw=2, color="blue", marker='o', markersize=3, label="Optimized Route")  # new label for legend
+
+    # Add legend box in top-right corner
+    ax.legend(loc='upper right', frameon=True)  # new comment: show what red and blue lines represent
 
     # Labels
     ax.set_title("Plot of Salesman's Cities")
-    ax.set_xlabel("longitude")
-    ax.set_ylabel("latitude")
+    ax.set_xlabel("Longitude")
+    ax.set_ylabel("Latitude")
 
     # Axis ranges
-    # (North America)
-    ax.set_xlim(-180, -60)
-    ax.set_ylim(10, 75)
-    if region=="World":
+    if region == "NA":
+        ax.set_xlim(-180, -60)
+        ax.set_ylim(10, 75)
+    elif region == "World":
         ax.set_xlim(-180, 180)
         ax.set_ylim(-90, 90)
 
-    # Time-zone arrows (vertical lines)
-    #for x in [-85.5, -102, -114]:
-    #    ax.axvline(x, color='black', lw=1)
-
-    # Remove border on top + right (like gnuplot unset border)
+    # Remove top + right border
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
 
     # Save plot
-    plotfile=infile.split('.')[0]+'.pdf'
+    plotfile = infile.split('.')[0] + '.pdf'
     plt.savefig(plotfile, format='pdf', facecolor='white')
+    print(f"Plot saved as {plotfile}")
 
-    print('close plot or "^C" to exit')
+    print('Close plot or "^C" to exit')
     try:
         plt.show()
     except KeyboardInterrupt:
@@ -109,24 +109,23 @@ def make_plot(infile,optfile=None,region="NA"):
 def usage():
     print('usage:')
     print('python routeplot.py cities.dat [cities2.dat] -w plot the whole world')
-        
+
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='route plotter')
-    parser.add_argument('paths', nargs='*',
-                        help='''paths to plot: original [optimized]''')
-    parser.add_argument("-w", action='store_true',
-                        help="plo the whole world, default in North America only")
+    parser = argparse.ArgumentParser(description='Route plotter')
+    parser.add_argument('paths', nargs='*', help='paths to plot: original [optimized]')
+    parser.add_argument("-w", action='store_true', help="plot the whole world, default North America only")
     args = parser.parse_args()
-    if len(args.paths)<1:
-        print ("at least one input file needed")
+
+    if len(args.paths) < 1:
+        print("At least one input file needed")
         usage()
         exit(1)
-    cities=args.paths[0]
-    cities2=None
-    if len(args.paths)>1:cities2= args.paths[1]
-    if args.w: region="World"
-    else: region="NA"
-    make_plot(cities,cities2,region)
 
+    cities = args.paths[0]
+    cities2 = None
+    if len(args.paths) > 1:
+        cities2 = args.paths[1]
 
+    region = "World" if args.w else "NA"
+    make_plot(cities, cities2, region)
 

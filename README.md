@@ -69,17 +69,18 @@ python routeplot.py cities2k.dat route2k.dat -w
 Plots
 Route Plots (PDF)
 
-cities23.pdf
-cities150.pdf
-cities1k.pdf
-cities2k.pdf (generated using the -w option)
+'cities23.pdf'
+'cities150.pdf'
+'cities1k.pdf'
+'cities2k.pdf (generated using the -w option)'
 
-Annealing Schedules (Distance vs Temperature)
-an23.png
-an150.png
-an1.png
-an2.png
-Each annealing plot shows the total route distance as a function of temperature during the simulated annealing process.
+'Annealing Schedules (Distance vs Temperature)'
+'an23.png'
+'an150.png'
+'an1.png'
+'an2.png'
+
+'Each annealing plot shows the total route distance as a function of temperature during the simulated annealing process.'
 
 Updates to routeplot.py
 Legend added: The plot now includes a legend in the top-left corner to indicate which line corresponds to which route:

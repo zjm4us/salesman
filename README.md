@@ -78,8 +78,8 @@ python routeplot.py cities2k.dat route2k.dat -w
 
 - `an23.png`  
 - `an150.png`  
-- `an1.png`  
-- `an2.png`  
+- `an1.png`   (This is for 1k)  
+- `an2.png`   (This is for 2k)
 
 > Each plot shows the total route distance as a function of temperature during the simulated annealing process.
 

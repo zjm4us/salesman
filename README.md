@@ -53,14 +53,18 @@ For the full-world plot (e.g., 2k cities dataset), use the -w option:
 
 python routeplot.py cities2k.dat route2k.dat -w
 
-Results
-Dataset	Original| Length (km)	|Nearest Neighbor (km)	|Simulated Annealing (km)	|Time (s)
-cities23	| 38,963.19     |  13,859.39	        |        13,404.55	        | 37.42
-cities150	| 317,298.65    | 56,179.86             |        49,765.03	        | 45.89
-cities1k	| 732,177.74	| 119,212.88            |       102,685.70	        | 113.29
-cities2k	| 10,187,617.64	| 355,493.95            |       355,470.95	        | 190.33
+# Results
 
-All distances are round-trip distances in kilometers.
+| Dataset    | Original Length (km) | Nearest Neighbor (km) | Simulated Annealing (km) | Time (s) |
+|-----------|--------------------:|---------------------:|------------------------:|---------:|
+| cities23  | 38,963.19           | 13,859.39            | 13,404.55               | 37.42    |
+| cities150 | 317,298.65          | 56,179.86            | 49,765.03               | 45.89    |
+| cities1k  | 732,177.74          | 119,212.88           | 102,685.70              | 113.29   |
+| cities2k  | 10,187,617.64       | 355,493.95           | 355,470.95              | 190.33   |
+
+> All distances are **round-trip distances** in kilometers.
+
+
 
 Plots
 Route Plots (PDF)
